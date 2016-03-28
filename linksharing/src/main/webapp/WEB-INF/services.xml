@@ -1,0 +1,60 @@
+<beans xmlns="http://www.springframework.org/schema/beans" 
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xmlns:context="http://www.springframework.org/schema/context"
+		xmlns:aop="http://www.springframework.org/schema/aop"
+		xsi:schemaLocation="http://www.springframework.org/schema/beans 
+			http://www.springframework.org/schema/beans/spring-beans-4.2.xsd 
+			http://www.springframework.org/schema/context
+			http://www.springframework.org/schema/context/spring-context-4.2.xsd
+			http://www.springframework.org/schema/aop 
+			http://www.springframework.org/schema/aop/spring-aop-4.2.xsd">
+	
+	<import resource="daos.xml" />
+	
+	<bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	
+	<bean id="baseTransactionProxy" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" 
+			abstract="true">
+		<property name="optimize" value="true" />
+		<property name="proxyTargetClass" value="true" />
+		<property name="transactionManager" ref="transactionManager" />
+		<property name="transactionAttributes">
+			<props>
+				<prop key="save*">PROPAGATION_REQUIRES_NEW,-Exception</prop>
+				<prop key="update*">PROPAGATION_REQUIRES_NEW,-Exception</prop>
+				<prop key="delete*">PROPAGATION_REQUIRES_NEW,-Exception</prop>
+				<prop key="get*">PROPAGATION_REQUIRED,readOnly</prop>
+				<prop key="retrieve*">PROPAGATION_REQUIRED,readOnly</prop>
+				<prop key="cleanup*">PROPAGATION_REQUIRES_NEW,-Exception</prop>
+			</props>
+		</property>
+	</bean>
+	
+	<bean id="userService" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.ttnd.linksharing.service.impl.UserServiceImpl">
+				<property name="userDAO">
+					<ref bean="userDAO" />
+				</property>
+			</bean>
+		</property>
+	</bean>
+	
+	<bean id="topicService" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.ttnd.linksharing.service.impl.TopicServiceImpl">
+				<property name="topicDAO">
+					<ref bean="topicDAO" />
+				</property>
+				<property name="userService">
+					<ref bean="userService" />
+				</property>
+			</bean>
+		</property>
+	</bean>
+	
+</beans>
