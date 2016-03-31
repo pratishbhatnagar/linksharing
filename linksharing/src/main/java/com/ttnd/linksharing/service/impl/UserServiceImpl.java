@@ -33,6 +33,7 @@ public class UserServiceImpl implements UserService {
 			User user = new User(userDTO.getEmail(), userDTO.getUsername(), userDTO.getPassword(),
 					userDTO.getFirstName(), userDTO.getLastName(), new Date(), new Date());
 			logger.info("User created : " + user);
+			
 			id = userDAO.saveUser(user);
 		}
 		return id;

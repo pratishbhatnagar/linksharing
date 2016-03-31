@@ -39,7 +39,8 @@ public class User implements Serializable {
 		super();
 	}
 
-	public User(String email, String username, String password, String firstName, String lastName, Date dateCreated, Date lastUpdated) {
+	public User(String email, String username, String password, String firstName, String lastName, Date dateCreated,
+			Date lastUpdated) {
 		super();
 		this.email = email;
 		this.username = username;
@@ -61,7 +62,7 @@ public class User implements Serializable {
 		this.userId = userId;
 	}
 
-	@Column(name = "email")
+	@Column(name = "email", nullable = false)
 	public String getEmail() {
 		return email;
 	}
@@ -70,7 +71,7 @@ public class User implements Serializable {
 		this.email = email;
 	}
 
-	@Column(name = "username")
+	@Column(name = "username", nullable = false)
 	public String getUsername() {
 		return username;
 	}
@@ -79,7 +80,7 @@ public class User implements Serializable {
 		this.username = username;
 	}
 
-	@Column(name = "password")
+	@Column(name = "password", nullable = false)
 	public String getPassword() {
 		return password;
 	}
@@ -88,7 +89,7 @@ public class User implements Serializable {
 		this.password = password;
 	}
 
-	@Column(name = "first_name")
+	@Column(name = "first_name", nullable = false)
 	public String getFirstName() {
 		return firstName;
 	}
@@ -97,7 +98,7 @@ public class User implements Serializable {
 		this.firstName = firstName;
 	}
 
-	@Column(name = "last_name")
+	@Column(name = "last_name", nullable = false)
 	public String getLastName() {
 		return lastName;
 	}

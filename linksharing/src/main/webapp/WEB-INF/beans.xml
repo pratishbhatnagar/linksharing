@@ -15,6 +15,7 @@
 		scope="prototype" />
 	<bean id="subscription" class="com.ttnd.linksharing.entities.Subscription"
 		scope="prototype" />
+	<bean id="resource" class="com.ttnd.linksharing.entities.Resource" scope="prototype" />
 	<bean id="userController" class="com.ttnd.linksharing.controller.UserController" />
 
 </beans>

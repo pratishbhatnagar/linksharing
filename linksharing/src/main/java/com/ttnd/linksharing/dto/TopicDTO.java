@@ -13,6 +13,7 @@ import com.ttnd.linksharing.utils.enums.Visibility;
 public class TopicDTO implements Serializable {
 
 	private static final long serialVersionUID = -2867563381104306330L;
+	private Integer topicId;
 	private String topicName;
 	private UserDTO createdBy;
 	private Visibility visibility;
@@ -26,6 +27,14 @@ public class TopicDTO implements Serializable {
 		this.topicName = topicName;
 		this.createdBy = createdBy;
 		this.visibility = visibility;
+	}
+
+	public Integer getTopicId() {
+		return topicId;
+	}
+
+	public void setTopicId(Integer topicId) {
+		this.topicId = topicId;
 	}
 
 	public String getTopicName() {

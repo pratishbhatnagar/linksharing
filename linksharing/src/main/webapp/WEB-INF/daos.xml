@@ -59,4 +59,16 @@
 		</property>
 	</bean>
 	
+	<bean id="resourceDAO" class="com.ttnd.linksharing.dao.impl.ResourceDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	
+	<bean id="subscriptionDAO" class="com.ttnd.linksharing.dao.impl.SubscriptionDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	
 </beans>

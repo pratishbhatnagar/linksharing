@@ -31,7 +31,7 @@ public class UserDAOImpl extends HibernateDaoSupport implements UserDAO {
 		return id;
 	}
 
-	public User getUser(String username) {
+	private User getUser(String username) {
 		DetachedCriteria criteria = DetachedCriteria.forClass(User.class);
 		criteria.add(Restrictions.eq("username", username));
 		List<?> list = getHibernateTemplate().findByCriteria(criteria);
@@ -44,16 +44,11 @@ public class UserDAOImpl extends HibernateDaoSupport implements UserDAO {
 
 	public User getUser(String username, String password) {
 		logger.info("Inside getUser method");
-		DetachedCriteria criteria = DetachedCriteria.forClass(User.class);
-		criteria.add(Restrictions.eq("username", username));
-		criteria.add(Restrictions.eq("password", password));
-		List<?> list = getHibernateTemplate().findByCriteria(criteria);
-		if (list.isEmpty()) {
-			return null;
-		} else {
-			User user = (User) list.get(0);
-			return user;
+		User user = getUser(username);
+		if (user != null && !user.getPassword().equals(password)) {
+			user = null;
 		}
+		return user;
 	}
 
 }

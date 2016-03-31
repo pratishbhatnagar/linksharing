@@ -61,7 +61,7 @@ public class Topic implements Serializable {
 		this.topicId = topicId;
 	}
 
-	@Column(name = "name")
+	@Column(name = "name", nullable = false)
 	public String getName() {
 		return name;
 	}
@@ -99,7 +99,7 @@ public class Topic implements Serializable {
 		this.lastUpdated = lastUpdated;
 	}
 
-	@Column(name = "visibility")
+	@Column(name = "visibility", nullable = false)
 	@Enumerated(EnumType.STRING)
 	public Visibility getVisibility() {
 		return visibility;

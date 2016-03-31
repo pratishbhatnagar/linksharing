@@ -4,7 +4,6 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 /**
@@ -15,7 +14,6 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "document_resource")
-@PrimaryKeyJoinColumn(name = "resource_id")
 public class DocumentResource extends Resource {
 
 	private static final long serialVersionUID = 106784749222615526L;
